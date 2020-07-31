@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import IPInfo from "./IPInfo";
+
+const client = new ApolloClient({
+  uri:
+    "https://api.everbase.co/graphql?apikey=4dfa844d-8ffc-41f6-93fe-d761e339c18b",
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="container">
+        <IPInfo />
+      </div>
+    </ApolloProvider>
   );
 }
 
